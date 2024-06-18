@@ -1,7 +1,12 @@
+APP = penguin-app
+BIN_FOLDER = ./bin
+CMD_SRC = cmd/penguin-project/main.go
+
 build:
-	go build -o ./bin/penguin-app cmd/penguin-project/main.go
+	go build -o $(BIN_FOLDER)/$(APP) $(CMD_SRC)
 
 run:
-	./bin/penguin-app
+	./bin/$(APP)
+
 clean:
-	rm -rf ./bin
+	rm -rf $(BIN_FOLDER)
