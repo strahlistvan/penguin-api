@@ -1,19 +1,33 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"strconv"
 )
 
+const (
+	defaultAddress string = "127.0.0.1"
+	defaultPort    string = "8082"
+)
+
+var (
+	address string
+	port    string
+)
+
 func main() {
-	fmt.Println("Server running on localhost port 8082")
+	flag.StringVar(&address, "addr", defaultAddress, "Server address")
+	flag.StringVar(&port, "port", defaultPort, "Server port")
+	fmt.Printf("Server running on %v port %v", address, port)
 	runAPI()
 }
 
 func runAPI() {
+	fullAddress := address + ":" + port
 	http.HandleFunc("/test", TestHandle)
-	http.ListenAndServe(":8082", nil)
+	http.ListenAndServe(fullAddress, nil)
 }
 
 func TestHandle(wr http.ResponseWriter, req *http.Request) {
