@@ -9,7 +9,7 @@ import (
 
 const (
 	defaultAddress string = "127.0.0.1"
-	defaultPort    string = "8082"
+	defaultPort    string = "80"
 )
 
 var (
@@ -20,6 +20,8 @@ var (
 func main() {
 	flag.StringVar(&address, "addr", defaultAddress, "Server address")
 	flag.StringVar(&port, "port", defaultPort, "Server port")
+	flag.Parse()
+
 	fmt.Printf("Server running on %v port %v", address, port)
 	runAPI()
 }
